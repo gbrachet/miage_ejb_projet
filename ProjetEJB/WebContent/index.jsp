@@ -1,13 +1,15 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    	               "http://www.w3.org/TR/html4/loose.dtd">
-
-<html>
-  <head>
-    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    	<title>GlassFish JSP Page</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-  </body>
-</html> 
+ <jsp:include page="WEB-INF/templates/entete.jsp" />
+	<form class="form-signin" style="width:40%;margin: 0 auto">
+		<h2>Connexion</h2>
+		
+		<input type="text" class="input-block-level" placeholder="Identifiant de connexion" required> 
+		
+		<input type="password" class="input-block-level" placeholder="Mot de passe" required> 
+		
+		<label class="checkbox"> 
+			<input type="checkbox" value="remember-me">
+			Se souvenir de moi
+		</label>
+		<button class="btn btn-large btn-primary" type="submit">Connexion</button>
+	</form>
+<jsp:include page="WEB-INF/templates/pied.jsp" />

@@ -1,127 +1,151 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
- * Class modélisant un article
+ * The persistent class for the Article database table.
+ * 
  */
 @Entity
 public class Article implements Serializable {
-	
-	/** Identifiant de Sérialisation  */
-	private static final long serialVersionUID = -4011003122881905362L;
+	private static final long serialVersionUID = 1L;
 
-	/* Attributs */
-	
 	@Id
-	@GeneratedValue
-	@Column(name="idArticle", nullable=false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idArticle;
-	private String titre;
-	private String resume;
-	private String corps;
-	//TODO
-//	private List<Tag> tags;
-//	private Utilisateur auteur;
-	private boolean visible;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date publication;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date miseAJour;
-	
-	/* Constructeurs */
 
-	/**
-	 * Constructeur vide
-	 */
+	private Object corps;
+
+	private Timestamp miseAJour;
+
+	private float prix;
+
+	private Timestamp publication;
+
+	private Object resume;
+
+	private String statut;
+
+	private String titre;
+
+	//bi-directional many-to-one association to Utilisateur
+	@ManyToOne
+	@JoinColumn(name="utilisateur")
+	private Utilisateur utilisateurBean;
+
+	//bi-directional many-to-many association to Groupe
+	@ManyToMany(mappedBy="articles")
+	private List<Groupe> groupes;
+
+	//bi-directional many-to-one association to LigneCommande
+	@OneToMany(mappedBy="articleBean")
+	private List<LigneCommande> ligneCommandes;
+
+	//bi-directional many-to-one association to Tag
+	@OneToMany(mappedBy="articleBean")
+	private List<Tag> tags;
+
 	public Article() {
 	}
 
-	/**
-	 * Constructeur initialisant les paramètres
-	 * @param idArticle
-	 * @param titre
-	 * @param resume
-	 * @param corps
-	 * @param visible
-	 * @param publication
-	 * @param miseAJour
-	 */
-	public Article(int idArticle, String titre, String resume, String corps,
-			boolean visible, Date publication, Date miseAJour) {
-		super();
-		this.idArticle = idArticle;
-		this.titre = titre;
-		this.resume = resume;
-		this.corps = corps;
-		this.visible = visible;
-		this.publication = publication;
-		this.miseAJour = miseAJour;
-	}
-
-	/* Get & Set */
-	
 	public int getIdArticle() {
-		return idArticle;
+		return this.idArticle;
 	}
 
 	public void setIdArticle(int idArticle) {
 		this.idArticle = idArticle;
 	}
 
+	public Object getCorps() {
+		return this.corps;
+	}
+
+	public void setCorps(Object corps) {
+		this.corps = corps;
+	}
+
+	public Timestamp getMiseAJour() {
+		return this.miseAJour;
+	}
+
+	public void setMiseAJour(Timestamp miseAJour) {
+		this.miseAJour = miseAJour;
+	}
+
+	public float getPrix() {
+		return this.prix;
+	}
+
+	public void setPrix(float prix) {
+		this.prix = prix;
+	}
+
+	public Timestamp getPublication() {
+		return this.publication;
+	}
+
+	public void setPublication(Timestamp publication) {
+		this.publication = publication;
+	}
+
+	public Object getResume() {
+		return this.resume;
+	}
+
+	public void setResume(Object resume) {
+		this.resume = resume;
+	}
+
+	public String getStatut() {
+		return this.statut;
+	}
+
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+
 	public String getTitre() {
-		return titre;
+		return this.titre;
 	}
 
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
 
-	public String getResume() {
-		return resume;
+	public Utilisateur getUtilisateurBean() {
+		return this.utilisateurBean;
 	}
 
-	public void setResume(String resume) {
-		this.resume = resume;
+	public void setUtilisateurBean(Utilisateur utilisateurBean) {
+		this.utilisateurBean = utilisateurBean;
 	}
 
-	public String getCorps() {
-		return corps;
+	public List<Groupe> getGroupes() {
+		return this.groupes;
 	}
 
-	public void setCorps(String corps) {
-		this.corps = corps;
+	public void setGroupes(List<Groupe> groupes) {
+		this.groupes = groupes;
 	}
 
-	public boolean isVisible() {
-		return visible;
+	public List<LigneCommande> getLigneCommandes() {
+		return this.ligneCommandes;
 	}
 
-	public void setVisible(boolean visible) {
-		this.visible = visible;
+	public void setLigneCommandes(List<LigneCommande> ligneCommandes) {
+		this.ligneCommandes = ligneCommandes;
 	}
 
-	public Date getPublication() {
-		return publication;
+	public List<Tag> getTags() {
+		return this.tags;
 	}
 
-	public void setPublication(Date publication) {
-		this.publication = publication;
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
 	}
 
-	public Date getMiseAJour() {
-		return miseAJour;
-	}
-
-	public void setMiseAJour(Date miseAJour) {
-		this.miseAJour = miseAJour;
-	}
 }
