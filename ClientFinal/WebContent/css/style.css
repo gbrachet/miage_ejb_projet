@@ -1,0 +1,20 @@
+body{
+	margin: 0px;
+	padding: 0px;
+}
+
+.corps{
+	float: left;
+	width: 80%;
+}
+
+.connexion{
+	float: left;
+}
+
+.divFin{
+	clear: both;
+	width: 0px;
+	height: 0px;
+	overflow: hidden;
+}
