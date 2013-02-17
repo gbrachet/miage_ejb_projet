@@ -3,8 +3,9 @@ package gestionnaire;
 import java.sql.ResultSet;
 import java.util.List;
 
-import modelWithoutJPA.Article;
+import modelWithoutJPA.*;
 import remote.*;
+import local.*;
 import java.util.*;
 
 import javax.ejb.LocalBean;
@@ -12,7 +13,7 @@ import javax.ejb.Stateless;
 
 @Stateless
 @LocalBean
-public class GestionnaireArticles implements GestionnaireArticlesRemote{
+public class GestionnaireArticles implements GestionnaireArticlesRemote, GestionnaireArticlesLocal{
 
 	public List<Article> getListing() {
 		//appl à la base de données
@@ -24,10 +25,10 @@ public class GestionnaireArticles implements GestionnaireArticlesRemote{
 			while(result.next()){
 				//recherche de l'utilisateur
 				GestionnaireUtilisateur ga=new GestionnaireUtilisateur();
-				Utilisateur util=ga.find(result.getLong(7));
+				Utilisateur util=ga.find(result.getLong("utilisateur"));
 				
-				//ajouter des paramtre au constructeur de l'article
-				Article article=new Article();
+				//int idArticle, String titre, String resume, String corp, String statut, String publication, String miseAJour, Utilisateur utilisateur, double prix
+				Article article=new Article(result.getInt("idArticle"), result.getString("titre"), result.getString("resume"), result.getString("corp"), result.getString("statut"), result.getString("publication"), result.getString("miseAJour"), util, result.getInt("prix"));
 				retour.add(article);
 			}
 		}catch(Exception e){

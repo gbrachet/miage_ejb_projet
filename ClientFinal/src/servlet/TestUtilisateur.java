@@ -46,7 +46,7 @@ public class TestUtilisateur extends HttpServlet {
 			GestionnaireUtilisateurRemote bean = (GestionnaireUtilisateurRemote) new InitialContext().lookup("remote.GestionnaireUtilisateurRemote");
 			
 			//Ajout
-			bean.create(utilisateur);
+			//bean.create(utilisateur);
 			
 //			Utilisateur u = bean.find(1);  
 //			bean.delete(u);
