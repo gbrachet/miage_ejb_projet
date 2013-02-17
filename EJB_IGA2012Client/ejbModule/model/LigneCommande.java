@@ -9,33 +9,22 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name="LigneCommande")
 public class LigneCommande implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idLigneCommande;
-
 	private float prix;
-
-	//bi-directional many-to-one association to Article
-	@ManyToOne
-	@JoinColumn(name="article")
 	private Article articleBean;
-
-	//bi-directional many-to-one association to Groupe
-	@ManyToOne
-	@JoinColumn(name="groupe")
-	private Groupe groupeBean;
-
-	//bi-directional many-to-one association to Commande
-	@ManyToOne
-	@JoinColumn(name="commande")
 	private Commande commandeBean;
+	private Groupe groupeBean;
 
 	public LigneCommande() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	public int getIdLigneCommande() {
 		return this.idLigneCommande;
 	}
@@ -44,6 +33,8 @@ public class LigneCommande implements Serializable {
 		this.idLigneCommande = idLigneCommande;
 	}
 
+
+	@Column(nullable=false)
 	public float getPrix() {
 		return this.prix;
 	}
@@ -52,6 +43,10 @@ public class LigneCommande implements Serializable {
 		this.prix = prix;
 	}
 
+
+	//bi-directional many-to-one association to Article
+	@ManyToOne
+	@JoinColumn(name="article")
 	public Article getArticleBean() {
 		return this.articleBean;
 	}
@@ -60,20 +55,28 @@ public class LigneCommande implements Serializable {
 		this.articleBean = articleBean;
 	}
 
-	public Groupe getGroupeBean() {
-		return this.groupeBean;
-	}
 
-	public void setGroupeBean(Groupe groupeBean) {
-		this.groupeBean = groupeBean;
-	}
-
+	//bi-directional many-to-one association to Commande
+	@ManyToOne
+	@JoinColumn(name="commande", nullable=false)
 	public Commande getCommandeBean() {
 		return this.commandeBean;
 	}
 
 	public void setCommandeBean(Commande commandeBean) {
 		this.commandeBean = commandeBean;
+	}
+
+
+	//bi-directional many-to-one association to Groupe
+	@ManyToOne
+	@JoinColumn(name="groupe")
+	public Groupe getGroupeBean() {
+		return this.groupeBean;
+	}
+
+	public void setGroupeBean(Groupe groupeBean) {
+		this.groupeBean = groupeBean;
 	}
 
 }

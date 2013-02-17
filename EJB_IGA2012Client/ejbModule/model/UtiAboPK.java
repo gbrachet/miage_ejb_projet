@@ -11,19 +11,21 @@ import javax.persistence.*;
 public class UtiAboPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
-
 	private int utilisateur;
-
 	private int abonnement;
 
 	public UtiAboPK() {
 	}
+
+	@Column(unique=true, nullable=false)
 	public int getUtilisateur() {
 		return this.utilisateur;
 	}
 	public void setUtilisateur(int utilisateur) {
 		this.utilisateur = utilisateur;
 	}
+
+	@Column(unique=true, nullable=false)
 	public int getAbonnement() {
 		return this.abonnement;
 	}

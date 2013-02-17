@@ -9,20 +9,17 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name="Tag")
 public class Tag implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@EmbeddedId
 	private TagPK id;
-
-	//bi-directional many-to-one association to Article
-	@ManyToOne
-	@JoinColumn(name="article")
 	private Article articleBean;
 
 	public Tag() {
 	}
 
+
+	@EmbeddedId
 	public TagPK getId() {
 		return this.id;
 	}
@@ -31,6 +28,10 @@ public class Tag implements Serializable {
 		this.id = id;
 	}
 
+
+	//bi-directional many-to-one association to Article
+	@ManyToOne
+	@JoinColumn(name="article", nullable=false, insertable=false, updatable=false)
 	public Article getArticleBean() {
 		return this.articleBean;
 	}

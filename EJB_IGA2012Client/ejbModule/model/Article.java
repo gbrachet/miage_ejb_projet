@@ -11,58 +11,29 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="Article")
 public class Article implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idArticle;
-
-	@Lob
 	private String corps;
-
 	private Timestamp miseAJour;
-
 	private float prix;
-
 	private Timestamp publication;
-
-	@Lob
 	private String resume;
-
 	private String statut;
-
 	private String titre;
-
-	//bi-directional many-to-many association to Groupe
-	@ManyToMany
-	@JoinTable(
-		name="ArtGro"
-		, joinColumns={
-			@JoinColumn(name="article")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="groupe")
-			}
-		)
 	private List<Groupe> groupes;
-
-	//bi-directional many-to-one association to Utilisateur
-	@ManyToOne
-	@JoinColumn(name="utilisateur")
 	private Utilisateur utilisateurBean;
-
-	//bi-directional many-to-one association to LigneCommande
-	@OneToMany(mappedBy="articleBean")
 	private List<LigneCommande> ligneCommandes;
-
-	//bi-directional many-to-one association to Tag
-	@OneToMany(mappedBy="articleBean")
 	private List<Tag> tags;
 
 	public Article() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	public int getIdArticle() {
 		return this.idArticle;
 	}
@@ -71,6 +42,9 @@ public class Article implements Serializable {
 		this.idArticle = idArticle;
 	}
 
+
+	@Lob
+	@Column(nullable=false)
 	public String getCorps() {
 		return this.corps;
 	}
@@ -79,6 +53,8 @@ public class Article implements Serializable {
 		this.corps = corps;
 	}
 
+
+	@Column(nullable=false)
 	public Timestamp getMiseAJour() {
 		return this.miseAJour;
 	}
@@ -87,6 +63,8 @@ public class Article implements Serializable {
 		this.miseAJour = miseAJour;
 	}
 
+
+	@Column(nullable=false)
 	public float getPrix() {
 		return this.prix;
 	}
@@ -95,6 +73,8 @@ public class Article implements Serializable {
 		this.prix = prix;
 	}
 
+
+	@Column(nullable=false)
 	public Timestamp getPublication() {
 		return this.publication;
 	}
@@ -103,6 +83,9 @@ public class Article implements Serializable {
 		this.publication = publication;
 	}
 
+
+	@Lob
+	@Column(nullable=false)
 	public String getResume() {
 		return this.resume;
 	}
@@ -111,6 +94,8 @@ public class Article implements Serializable {
 		this.resume = resume;
 	}
 
+
+	@Column(nullable=false, length=1)
 	public String getStatut() {
 		return this.statut;
 	}
@@ -119,6 +104,8 @@ public class Article implements Serializable {
 		this.statut = statut;
 	}
 
+
+	@Column(nullable=false, length=32)
 	public String getTitre() {
 		return this.titre;
 	}
@@ -127,6 +114,18 @@ public class Article implements Serializable {
 		this.titre = titre;
 	}
 
+
+	//bi-directional many-to-many association to Groupe
+	@ManyToMany
+	@JoinTable(
+		name="ArtGro"
+		, joinColumns={
+			@JoinColumn(name="article", nullable=false)
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="groupe", nullable=false)
+			}
+		)
 	public List<Groupe> getGroupes() {
 		return this.groupes;
 	}
@@ -135,6 +134,10 @@ public class Article implements Serializable {
 		this.groupes = groupes;
 	}
 
+
+	//bi-directional many-to-one association to Utilisateur
+	@ManyToOne
+	@JoinColumn(name="utilisateur", nullable=false)
 	public Utilisateur getUtilisateurBean() {
 		return this.utilisateurBean;
 	}
@@ -143,6 +146,9 @@ public class Article implements Serializable {
 		this.utilisateurBean = utilisateurBean;
 	}
 
+
+	//bi-directional many-to-one association to LigneCommande
+	@OneToMany(mappedBy="articleBean")
 	public List<LigneCommande> getLigneCommandes() {
 		return this.ligneCommandes;
 	}
@@ -151,6 +157,9 @@ public class Article implements Serializable {
 		this.ligneCommandes = ligneCommandes;
 	}
 
+
+	//bi-directional many-to-one association to Tag
+	@OneToMany(mappedBy="articleBean")
 	public List<Tag> getTags() {
 		return this.tags;
 	}

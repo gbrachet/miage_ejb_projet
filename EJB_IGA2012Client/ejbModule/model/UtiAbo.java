@@ -10,29 +10,20 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
+@Table(name="UtiAbo")
 public class UtiAbo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@EmbeddedId
 	private UtiAboPK id;
-
 	private Timestamp achat;
-
 	private int nombre;
-
-	//bi-directional many-to-one association to Utilisateur
-	@ManyToOne
-	@JoinColumn(name="utilisateur")
-	private Utilisateur utilisateurBean;
-
-	//bi-directional many-to-one association to Abonnement
-	@ManyToOne
-	@JoinColumn(name="abonnement")
 	private Abonnement abonnementBean;
+	private Utilisateur utilisateurBean;
 
 	public UtiAbo() {
 	}
 
+
+	@EmbeddedId
 	public UtiAboPK getId() {
 		return this.id;
 	}
@@ -41,6 +32,8 @@ public class UtiAbo implements Serializable {
 		this.id = id;
 	}
 
+
+	@Column(nullable=false)
 	public Timestamp getAchat() {
 		return this.achat;
 	}
@@ -49,6 +42,8 @@ public class UtiAbo implements Serializable {
 		this.achat = achat;
 	}
 
+
+	@Column(nullable=false)
 	public int getNombre() {
 		return this.nombre;
 	}
@@ -57,20 +52,28 @@ public class UtiAbo implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Utilisateur getUtilisateurBean() {
-		return this.utilisateurBean;
-	}
 
-	public void setUtilisateurBean(Utilisateur utilisateurBean) {
-		this.utilisateurBean = utilisateurBean;
-	}
-
+	//bi-directional many-to-one association to Abonnement
+	@ManyToOne
+	@JoinColumn(name="abonnement", nullable=false, insertable=false, updatable=false)
 	public Abonnement getAbonnementBean() {
 		return this.abonnementBean;
 	}
 
 	public void setAbonnementBean(Abonnement abonnementBean) {
 		this.abonnementBean = abonnementBean;
+	}
+
+
+	//bi-directional many-to-one association to Utilisateur
+	@ManyToOne
+	@JoinColumn(name="utilisateur", nullable=false, insertable=false, updatable=false)
+	public Utilisateur getUtilisateurBean() {
+		return this.utilisateurBean;
+	}
+
+	public void setUtilisateurBean(Utilisateur utilisateurBean) {
+		this.utilisateurBean = utilisateurBean;
 	}
 
 }

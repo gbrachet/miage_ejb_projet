@@ -11,19 +11,21 @@ import javax.persistence.*;
 public class TagPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
-
 	private int article;
-
 	private String nom;
 
 	public TagPK() {
 	}
+
+	@Column(unique=true, nullable=false)
 	public int getArticle() {
 		return this.article;
 	}
 	public void setArticle(int article) {
 		this.article = article;
 	}
+
+	@Column(unique=true, nullable=false, length=16)
 	public String getNom() {
 		return this.nom;
 	}

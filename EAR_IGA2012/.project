@@ -4,7 +4,6 @@
 	<comment></comment>
 	<projects>
 		<project>Client</project>
-		<project>Client_IGA2012</project>
 		<project>EJB_IGA2012</project>
 		<project>EJB_IGA2012Client</project>
 	</projects>

@@ -10,28 +10,23 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="Abonnement")
 public class Abonnement implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idAbonnement;
-
 	private int nombre;
-
 	private int periode;
-
 	private float prix;
-
 	private String titre;
-
-	//bi-directional many-to-one association to UtiAbo
-	@OneToMany(mappedBy="abonnementBean")
 	private List<UtiAbo> utiAbos;
 
 	public Abonnement() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	public int getIdAbonnement() {
 		return this.idAbonnement;
 	}
@@ -40,6 +35,8 @@ public class Abonnement implements Serializable {
 		this.idAbonnement = idAbonnement;
 	}
 
+
+	@Column(nullable=false)
 	public int getNombre() {
 		return this.nombre;
 	}
@@ -48,6 +45,8 @@ public class Abonnement implements Serializable {
 		this.nombre = nombre;
 	}
 
+
+	@Column(nullable=false)
 	public int getPeriode() {
 		return this.periode;
 	}
@@ -56,6 +55,8 @@ public class Abonnement implements Serializable {
 		this.periode = periode;
 	}
 
+
+	@Column(nullable=false)
 	public float getPrix() {
 		return this.prix;
 	}
@@ -64,6 +65,8 @@ public class Abonnement implements Serializable {
 		this.prix = prix;
 	}
 
+
+	@Column(nullable=false, length=32)
 	public String getTitre() {
 		return this.titre;
 	}
@@ -72,6 +75,9 @@ public class Abonnement implements Serializable {
 		this.titre = titre;
 	}
 
+
+	//bi-directional many-to-one association to UtiAbo
+	@OneToMany(mappedBy="abonnementBean")
 	public List<UtiAbo> getUtiAbos() {
 		return this.utiAbos;
 	}

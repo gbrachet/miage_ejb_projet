@@ -11,29 +11,22 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="Commande")
 public class Commande implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idCommande;
-
 	private Timestamp date;
-
 	private String statut;
-
-	//bi-directional many-to-one association to Utilisateur
-	@ManyToOne
-	@JoinColumn(name="utilisateur")
 	private Utilisateur utilisateurBean;
-
-	//bi-directional many-to-one association to LigneCommande
-	@OneToMany(mappedBy="commandeBean")
 	private List<LigneCommande> ligneCommandes;
 
 	public Commande() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	public int getIdCommande() {
 		return this.idCommande;
 	}
@@ -42,6 +35,8 @@ public class Commande implements Serializable {
 		this.idCommande = idCommande;
 	}
 
+
+	@Column(nullable=false)
 	public Timestamp getDate() {
 		return this.date;
 	}
@@ -50,6 +45,8 @@ public class Commande implements Serializable {
 		this.date = date;
 	}
 
+
+	@Column(nullable=false, length=1)
 	public String getStatut() {
 		return this.statut;
 	}
@@ -58,6 +55,10 @@ public class Commande implements Serializable {
 		this.statut = statut;
 	}
 
+
+	//bi-directional many-to-one association to Utilisateur
+	@ManyToOne
+	@JoinColumn(name="utilisateur", nullable=false)
 	public Utilisateur getUtilisateurBean() {
 		return this.utilisateurBean;
 	}
@@ -66,6 +67,9 @@ public class Commande implements Serializable {
 		this.utilisateurBean = utilisateurBean;
 	}
 
+
+	//bi-directional many-to-one association to LigneCommande
+	@OneToMany(mappedBy="commandeBean")
 	public List<LigneCommande> getLigneCommandes() {
 		return this.ligneCommandes;
 	}

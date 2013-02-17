@@ -10,30 +10,23 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="Groupe")
 public class Groupe implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idGroupe;
-
 	private float prix;
-
 	private String statut;
-
 	private String titre;
-
-	//bi-directional many-to-many association to Article
-	@ManyToMany(mappedBy="groupes")
 	private List<Article> articles;
-
-	//bi-directional many-to-one association to LigneCommande
-	@OneToMany(mappedBy="groupeBean")
 	private List<LigneCommande> ligneCommandes;
 
 	public Groupe() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	public int getIdGroupe() {
 		return this.idGroupe;
 	}
@@ -42,6 +35,8 @@ public class Groupe implements Serializable {
 		this.idGroupe = idGroupe;
 	}
 
+
+	@Column(nullable=false)
 	public float getPrix() {
 		return this.prix;
 	}
@@ -50,6 +45,8 @@ public class Groupe implements Serializable {
 		this.prix = prix;
 	}
 
+
+	@Column(nullable=false, length=1)
 	public String getStatut() {
 		return this.statut;
 	}
@@ -58,6 +55,8 @@ public class Groupe implements Serializable {
 		this.statut = statut;
 	}
 
+
+	@Column(nullable=false, length=32)
 	public String getTitre() {
 		return this.titre;
 	}
@@ -66,6 +65,9 @@ public class Groupe implements Serializable {
 		this.titre = titre;
 	}
 
+
+	//bi-directional many-to-many association to Article
+	@ManyToMany(mappedBy="groupes")
 	public List<Article> getArticles() {
 		return this.articles;
 	}
@@ -74,6 +76,9 @@ public class Groupe implements Serializable {
 		this.articles = articles;
 	}
 
+
+	//bi-directional many-to-one association to LigneCommande
+	@OneToMany(mappedBy="groupeBean")
 	public List<LigneCommande> getLigneCommandes() {
 		return this.ligneCommandes;
 	}
