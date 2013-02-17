@@ -28,7 +28,7 @@ public class GestionnaireArticles implements GestionnaireArticlesRemote, Gestion
 				Utilisateur util=ga.find(result.getLong("utilisateur"));
 				
 				//int idArticle, String titre, String resume, String corp, String statut, String publication, String miseAJour, Utilisateur utilisateur, double prix
-				Article article=new Article(result.getInt("idArticle"), result.getString("titre"), result.getString("resume"), result.getString("corp"), result.getString("statut"), result.getString("publication"), result.getString("miseAJour"), util, result.getInt("prix"));
+				Article article=new Article(result.getInt("idArticle"), result.getString("titre"), result.getString("resume"), result.getString("corps"), result.getString("statut"), result.getString("publication"), result.getString("miseAJour"), util, result.getInt("prix"));
 				retour.add(article);
 			}
 		}catch(Exception e){
