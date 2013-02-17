@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="EJB_IGA2012" transaction-type="JTA">
+		<jta-data-source>jdbc/testpppm</jta-data-source>
+		<class>model.Abonnement</class>
+		<class>model.Article</class>
+		<class>model.Commande</class>
+		<class>model.Groupe</class>
+		<class>model.LigneCommande</class>
+		<class>model.Tag</class>
+		<class>model.TagPK</class>
+		<class>model.UtiAbo</class>
+		<class>model.UtiAboPK</class>
+		<class>model.Utilisateur</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<property name="javax.persistence.target-database" value="MYSQL" />
+			<property name="javax.persistence.logging.level" value="FINEST" />
+		</properties>
+
+	</persistence-unit>
+</persistence>
