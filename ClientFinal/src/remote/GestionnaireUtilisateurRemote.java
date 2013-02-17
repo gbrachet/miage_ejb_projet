@@ -1,8 +1,8 @@
 package remote;
 
 import javax.ejb.Remote;
+import modelWithoutJPA.*;
 
-import model.Utilisateur;
 
 @Remote
 public interface GestionnaireUtilisateurRemote {

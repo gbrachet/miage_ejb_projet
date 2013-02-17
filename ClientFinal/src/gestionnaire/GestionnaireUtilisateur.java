@@ -4,7 +4,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import local.GestionnaireUtilisateurLocal;
-import model.Utilisateur;
+import modelWithoutJPA.*;
 import remote.GestionnaireUtilisateurRemote;
 
 /**
@@ -25,10 +25,10 @@ public class GestionnaireUtilisateur implements GestionnaireUtilisateurLocal, Ge
 	
 	@Override
 	public void create(Utilisateur utilisateur) {
-		Mysql.queryI(
+		/*Mysql.queryI(
 			"INSERT INTO `Utilisateur`(`idUtilisateur`, `identifiant`, `motPasse`, `statut`) " +
 			"VALUES (NULL,'"+utilisateur.getIdentifiant()+"','"+utilisateur.getMotPasse()+"','"+utilisateur.getStatut()+"')"
-		);
+		);*/
 	}
 	
 	@Override
@@ -39,7 +39,7 @@ public class GestionnaireUtilisateur implements GestionnaireUtilisateurLocal, Ge
 	public void delete(Utilisateur utilisateur) {
 	}
 	
-	@Override
+	
 	public Utilisateur find(long id) {
 		return null;
 	}
