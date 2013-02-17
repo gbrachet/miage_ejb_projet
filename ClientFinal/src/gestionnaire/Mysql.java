@@ -14,8 +14,8 @@ public class Mysql {
 	public static int		number = 3306;	//Nombre de requête effectué
 	private static String	host = "localhost";	//Serveur de la base de données
 	private static String	user = "root";	//Nom d'utilisateur
-	private static String	pass = "";	//Mot de passe
-	private static String	base = "JEE";	//Base de donnée
+	private static String	pass = "aeseitohp9XuV";	//Mot de passe
+	private static String	base = "EJB";	//Base de donnée
 	
 	private static final String driver = "com.mysql.jdbc.Driver";
 	

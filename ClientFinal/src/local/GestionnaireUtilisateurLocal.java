@@ -10,7 +10,7 @@ public interface GestionnaireUtilisateurLocal {
 	 * Méthode permettant d'ajouter un utilisateur
 	 * @param (Utilisateur) utilisateur : l'utilisateur à ajouter
 	 */
-	public void create(Utilisateur utilisateur);
+	public void create(Utilisateur utilisateur, String motPasse);
 	
 	/**
 	 * Méthode permettant de modifier un utilisateur
@@ -24,10 +24,6 @@ public interface GestionnaireUtilisateurLocal {
 	 */
 	public void delete(Utilisateur utilisateur);
 	
-	/**
-	 * Méthode permettant de rechercher un utilisateur
-	 * @param (long) id : l'identifiant de l'utilisateur
-	 * @return (Utilisateur) l'utilisateur
-	 */
 	public Utilisateur find(long id);
+	public Utilisateur connect(String identifiant, String motPasse);
 }

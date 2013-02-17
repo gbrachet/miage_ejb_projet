@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.Random;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -12,19 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelWithoutJPA.Utilisateur;
+import remote.GestionnaireSessionRemote;
 import remote.GestionnaireUtilisateurRemote;
 
 /**
- * Servlet implementation class TestUtilisateur
+ * Servlet implementation class ServletConnexion
  */
-@WebServlet("/TestUtilisateur")
-public class TestUtilisateur extends HttpServlet {
+@WebServlet("/ServletConnexion")
+public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TestUtilisateur() {
+    public ServletConnexion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,39 +33,40 @@ public class TestUtilisateur extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			//Instanciation
-			Utilisateur utilisateur = new Utilisateur();
-			
-			//Modification
-			utilisateur.setIdentifiant("gautier"+(new Random().nextInt(10)+15));
-			utilisateur.setStatut("administrateur");
-			
-			//Gestionnaire utilisateur
-			GestionnaireUtilisateurRemote bean = (GestionnaireUtilisateurRemote) new InitialContext().lookup("remote.GestionnaireUtilisateurRemote");
-			
-			Utilisateur u = bean.connect("gautier3", "123456");
-			
-			response.getOutputStream().print((u == null)? "null" : u.toString());
-			System.out.println("ok");
-			
-			//Ajout
-			//bean.create(utilisateur);
-			
-//			Utilisateur u = bean.find(1);  
-//			bean.delete(u);
-			
-			 
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+		this.doPost(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		try {
+			//Gestionnaire utilisateur
+			GestionnaireUtilisateurRemote bean = (GestionnaireUtilisateurRemote) new InitialContext().lookup("remote.GestionnaireUtilisateurRemote");
+			
+			//Connexion
+			Utilisateur utilisateur = bean.connect(request.getParameter("identifiant"), request.getParameter("motPasse"));
+			
+			//Succés
+			if(utilisateur != null){
+				//Gestionnaire de session
+				GestionnaireSessionRemote session = (GestionnaireSessionRemote) new InitialContext().lookup(GestionnaireSessionRemote.class.getName());
+				
+				//Ajout
+				session.setUtilisateur(utilisateur);
+				
+				//TODO Redirection
+				response.getOutputStream().print("Connecté : "+utilisateur.getIdentifiant());
+			}
+			else{
+				//Redirection
+				response.sendRedirect("connexion.jsp?erreur=true");
+			}
+			
+			 
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -14,6 +14,9 @@ public class Utilisateur {
 		this.statut = statut;
 	}
 	
+	public Utilisateur() {
+	}
+	
 	
 	
 	public long getIdUtilisateur() {

@@ -10,7 +10,7 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/MySQL JDBC Driver"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Applications/eclipse JEE/plugins/oracle.eclipse.runtime.glassfish.build3122_1.0.0/glassfish3/glassfish/lib/appserv-rt.jar"/>
-	<classpathentry kind="lib" path="/Applications/eclipse JEE/plugins/oracle.eclipse.runtime.glassfish.build3122_1.0.0/glassfish3/glassfish/lib/gf-client.jar"/>
+	<classpathentry kind="lib" path="/home/gautier/glassfishOSE3/glassfishv3/glassfish/lib/gf-client.jar"/>
+	<classpathentry kind="lib" path="/home/gautier/glassfishOSE3/glassfishv3/glassfish/lib/appserv-rt.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
