@@ -2,7 +2,7 @@ package local;
 
 import javax.ejb.Local;
 
-import model.Utilisateur;
+import modelWithoutJPA.Utilisateur;
 
 @Local
 public interface GestionnaireUtilisateurLocal {
